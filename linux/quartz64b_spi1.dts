@@ -1,0 +1,38 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+
+ 
+&spi1 {
+	pinctrl-0 = <&spi1m1_cs0 &spi1m1_pins>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	spidev@0 {
+		compatible = "lwn,bk4";
+		reg = <0>;
+	};
+};
+
+&pinctrl {
+	spi1 {
+		spi1m1_pins: spi1m1-pins {
+			rockchip,pins =
+				/* spi1_clkm1 */
+				<3 RK_PC3 3 &pcfg_pull_none>,
+				/* spi1_misom1 */
+				<3 RK_PC2 3 &pcfg_pull_none>,
+				/* spi1_mosim1 */
+				<3 RK_PC1 3 &pcfg_pull_none>;
+		};
+
+		spi1m1_cs0: spi1m1-cs0 {
+			rockchip,pins =
+				/* spi1_cs0m1 */
+				<3 RK_PA1 3 &pcfg_pull_none>;
+		};
+	};
+};
